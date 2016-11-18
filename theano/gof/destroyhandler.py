@@ -1016,6 +1016,8 @@ class DestroyHandler(toolbox.Bookkeeper):  # noqa
                     # add the rule: app must be preceded by all other Apply instances that
                     # depend on destroyed_input
                     root_clients = OrderedSet()
+                    if app in rval:
+                        root_clients.update(rval[app])
                     for r in root_impact:
                         assert not [a for a, c in self.clients[r].items() if not c]
                         root_clients.update([a for a, c in self.clients[r].items() if c])
